@@ -11,7 +11,7 @@ const { connectDB } = require('./db/connectDB');
 
 const app = require('./app');
 
-connectDB(false)
+connectDB()
 const port = process.env.PORT || 8000;
 
 const server = app.listen(port, () => {
