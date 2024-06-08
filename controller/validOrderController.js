@@ -1,4 +1,4 @@
-const asyncErrorHandler = require("./../wrapper_functions/asyncErrorHandler");
+const asyncErrorHandler = require("../wrapper_functions/asyncErrorHandler");
 const API = require("../classes/Api");
 const Order = require("../models/Order");
 const User = require("../models/User");
@@ -42,6 +42,18 @@ const deleteOrder =  asyncErrorHandler(async (req, res,next) => {
     await order.deleteOne();
     api.dataHandler('delete')
 })
+const updateOrderStatus =asyncErrorHandler(async(req,res,next)=>{
+    const api = new API(req,res)
+    const {isSuccess} = req.body
+    const order = await Order.findById(req.params.id);
+ if(!order){
+    const error = api.errorHandler('not_found')
+    next(error)
+ }
+    await order.updateOne({ $set:{status:isSuccess?"successed":"failed"}  });
+   api.dataHandler('update')
+
+})
 module.exports ={
-    getOrders,getSingleOrder,getUserOrders,addOrder,deleteOrder,updateOrder
+    getOrders,getSingleOrder,getUserOrders,addOrder,deleteOrder,updateOrder,updateOrderStatus
 }

@@ -19,24 +19,16 @@ const OrderSchema = mongoose.Schema({
                 type:mongoose.Schema.Types.ObjectId,
                 ref:"products",
             },
-            count:Number
+            count:Number,
+            price:Number,
         }],
         
         required:true
     },
-    expectedTime:{
-        type:Date,
-        required:true
-    },
-
     createdAt: {
         type: Date,
         default: Date.now,
-    },
-    status:{
-        type:String,
-        enum:["waiting",'successed','failed'],
-        default:"waiting"
+        expires:604800
     }
 })
-module.exports = mongoose.model('orders',OrderSchema)
+module.exports = mongoose.model('invalidOrders',OrderSchema)
