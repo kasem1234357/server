@@ -8,6 +8,7 @@ const cors = require('cors')
 const userRoute = require('./routes/authRouter')
 const orderRoute = require('./routes/orderRouter')
 const ProductRoute = require('./routes/productRouter')
+const inValidOrederRoute =require('./routes/inValidOrderRouter')
 //===================================================//
 //============== meddlewares ========================//
 
@@ -31,6 +32,7 @@ app.use(requestTime)
 
 app.use('/api/user',userRoute)
 app.use('/api/order',orderRoute)
+app.use('/api/invalidOrder',inValidOrederRoute)
 app.use('/api/products',ProductRoute)
 //==============//
 // handling routes not found error
