@@ -52,8 +52,10 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
   // store new refresh token in database
   const newToken = await Token.create({token:refreshToken,userId:user._id})
   // send access and refresh token to db
+  delete user._doc.password
+  const userData = user._doc
   api.dataHandler("create", { accessToken, refreshToken:newToken.token,
-    userData:{name:user.name,userId:user._id }},'user log in and new tokens has been generated');
+    userData},'user log in and new tokens has been generated');
 });
 exports.token = asyncErrorHandler(async (req, res, next) => {
   const refreshToken = req.body.token;

@@ -12,11 +12,16 @@ const getSingleOrder = asyncErrorHandler(async(req,res,next)=>{
     const api = new API(req,res)
     const {orderId} = api.getParams()
     const order = await Order.findById(orderId)
+if(!order){
+    const error = api.errorHandler('not_found')
+    next(error)
+}
     api.dataHandler('fetch',{...order._doc})
 })
 const getUserOrders = asyncErrorHandler(async(req,res,next)=>{
     const api = new API(req,res)
     const {userId} = api.getParams()
+
     const userOrders = await Order.find({userId})
     api.dataHandler('fetch',{userOrders:[...userOrders],dataLength:userOrders.length})
 })

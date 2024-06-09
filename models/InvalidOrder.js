@@ -21,6 +21,8 @@ const OrderSchema = mongoose.Schema({
             },
             count:Number,
             price:Number,
+            imgUrl:String,
+            title:String,
         }],
         
         required:true
