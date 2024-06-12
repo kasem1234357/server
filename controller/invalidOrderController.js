@@ -34,6 +34,10 @@ const addOrder= asyncErrorHandler(async(req,res,next)=>{
 const updateOrder =  asyncErrorHandler(async (req, res,next) => {
     const api = new API(req,res)
     const order = await Order.findById(req.params.id);
+    if(!order){
+        const error = api.errorHandler('not_found')
+        next(error)
+    }
     await order.updateOne({ $set: req.body });
    api.dataHandler('update')
 })

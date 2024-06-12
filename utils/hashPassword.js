@@ -6,5 +6,4 @@ function hashPassword(password) {
     hash.update(password);
     return hash.digest('hex');
   }
-  console.log(hashPassword('kasem'))
 module.exports = hashPassword

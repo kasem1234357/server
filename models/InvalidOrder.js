@@ -6,7 +6,7 @@ const OrderSchema = mongoose.Schema({
         required:true
     },
     userNumber:{
-        type:Number,
+        type:String,
         required:true
     },
     userEmail:{
